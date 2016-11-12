@@ -142,6 +142,7 @@ Implemented Features in SCRAM 0.11.4
 - Probability calculations with importance analysis
 - Uncertainty analysis with Monte Carlo simulations
 - Fault tree generator
+- The shorthand format to the MEF converter
 
 
 Performance
@@ -167,21 +168,21 @@ No cut-off, all 46,188 MCS.
 CEA9601
 -------
 
-+-----------------------------------------------+
-| BDD                                           |
-+==============+========+===========+===========+
-| Cut-off      | 4      | 5         | 6         |
-+--------------+--------+-----------+-----------+
-| MCS          | 54,436 | 1,615,876 | 9,323,572 |
-+--------------+--------+-----------+-----------+
-| Time, s      | 1.6    | 3.4       | 12.6      |
-+--------------+--------+-----------+-----------+
-| Memory, MiB  | 215    | 310       | 1,350     |
-+--------------+--------+-----------+-----------+
-| Reporting, s | < 0.05 | 2.6       | 17.5      |
-+--------------+--------+-----------+-----------+
-| XML size, MB | 9.3    | 329       | 2,200     |
-+--------------+--------+-----------+-----------+
++-------------------------------------------------+
+| BDD                                             |
++================+========+===========+===========+
+| Cut-off order  | 4      | 5         | 6         |
++----------------+--------+-----------+-----------+
+| MCS            | 54,436 | 1,615,876 | 9,323,572 |
++----------------+--------+-----------+-----------+
+| Time, s        | 1.6    | 3.4       | 12.6      |
++----------------+--------+-----------+-----------+
+| Memory, MiB    | 215    | 310       | 1,350     |
++----------------+--------+-----------+-----------+
+| Reporting, s   | < 0.05 | 2.6       | 17.5      |
++----------------+--------+-----------+-----------+
+| XML size, MB   | 9.3    | 329       | 2,200     |
++----------------+--------+-----------+-----------+
 
 .. note:: The report XML size shrinks by 50x upon compression.
 
@@ -242,14 +243,47 @@ Challenges
     * Many names: Vote, Voting, Voting-OR, Combination, Combo, atleast, K/N, N-OR-MORE
     * API (Atleast vs. AtLeast vs. atleast vs. at_least)
 
-- Report CCF events in products
-- Report importance factors
 - XML report file size (50x compression)
+
+
+Report CCF events in products
+-----------------------------
+
+.. code-block:: xml
+
+  <results>
+    <sum-of-products name="TopEvent" basic-events="6" products="6">
+      <product order="2">
+        <ccf-event ccf-group="Pumps" order="1" group-size="2">
+          <basic-event name="PumpTwo"/>
+        </ccf-event>
+        <ccf-event ccf-group="Valves" order="1" group-size="2">
+          <basic-event name="ValveOne"/>
+        </ccf-event>
+      </product>
+      <!-- ... -->
+    </sum-of-products>
+  </results>
+
+
+Report importance factors
+-------------------------
+
+.. code-block:: xml
+
+  <results>
+    <importance name="TopEvent" basic-events="4">
+      <basic-event name="Pump" MIF="0.4" CIF="0.4" DIF="0.8" RAW="1.2" RRW="1.7"/>
+      <basic-event name="Valve" MIF="0.4" CIF="0.4" DIF="0.8" RAW="1.2" RRW="1.7"/>
+      <!-- ... -->
+    </importance>
+  </results>
 
 
 Proposals to the MEF
 ====================
 
+.. TODO: Consider separate page/slide.
 #. Host the MEF standard on GitHub
 
     * The organization: https://github.com/open-psa/
@@ -268,6 +302,7 @@ Proposals to the MEF
     * Automated conversion to ``html``, ``LaTeX``, ``pdf``, ...
     * Easy to learn and work with (in comparison to ``LaTeX``)
 
+.. TODO: Expand with examples
 #. RelaxNG or RelaxNG compact instead of the DTD schema
 
     * Simpler and more powerful than the DTD
