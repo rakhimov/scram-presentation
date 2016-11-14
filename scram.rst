@@ -345,38 +345,87 @@ Report importance factors
   </results>
 
 
-Proposals to the MEF
-====================
+.. raw:: pdf
 
-.. TODO: Consider separate page/slide.
+    PageBreak titlePage
 
-#. Host the MEF standard on GitHub
+.. class:: title
 
-    * The organization: https://github.com/open-psa/
-    * Move the validation schema from SCRAM to the MEF public repository
-    * Provide validation input (fault tree, event tree, etc.) for implementers
-    * SCRAM as a test-bed and early feedback for MEF features
-    * Scripts to convert inputs from other formats to the MEF
-    * Easy collaboration
-    * Issue tracking
-    * Free web-site hosting
-    * Many more free perks for the project
-    * Mailing lists for discussions (e.g., Google groups)
+Proposals to the OpenPSA MEF
+
+.. raw:: pdf
+
+    PageBreak cutePage
+
+Host the MEF standard on GitHub
+===============================
+
+For the OpenPSA
+---------------
+
+#. The organization: https://github.com/open-psa/
+#. Easy collaboration
+#. Issue tracking
+#. Free web-site hosting
+#. Many more free perks for the project
+
+For the Community
+-----------------
+
+#. SCRAM and other FOSS projects as test-beds and early feedback for MEF features
+#. Scripts to convert inputs from other formats to the MEF
+#. Move the validation schema from SCRAM to the MEF public repository
+#. Provide validation input (fault tree, event tree, etc.) for implementers
+
+Extra
+-----
+
+#. Mailing lists for discussions (e.g., Google groups)
+
+
+Specification for the Name format
+=================================
+
+#. Case-sensitive or case-agnostic (simplifies code for l10n/i18n)
+#. Insensitive to leading and trailing whitespace characters (trim)
+#. Consistent with `XML NCName datatype`_
+
+    * The first character must be alphabetic.
+    * May contain alphanumeric characters and special characters like ``_``, ``-``.
+    * No whitespace or other special characters like ``:``, ``,``, ``/``, etc.
+
+#. No double dashes ``--``
+#. No trailing dash
+#. No periods ``.``
+
+    * Reserved for the Reference format, i.e., ``fault_tree.component.event``
+
+.. _XML NCName datatype:
+    http://stackoverflow.com/questions/1631396/what-is-an-xsncname-type-and-when-should-it-be-used
+
+
+RelaxNG instead of the DTD schema
+=================================
+
+* Simpler and more powerful than the DTD
+* Automated conversion to ``XSD`` with trang_
+* RelaxNG compact looks very like the BNF
+
+
+It's Ready!
+-----------
+
+* `MEF RelaxNG Schema <https://github.com/rakhimov/scram/blob/master/share/open-psa/mef.rng>`_
+* `MEF RelaxNG Compact Schema <https://github.com/rakhimov/scram/blob/master/share/open-psa/mef.rnc>`_
+
+
+Other Proposals
+===============
 
 #. The MEF standard source text in reStructuredText_ format
 
     * Automated conversion to ``html``, ``LaTeX``, ``pdf``, ...
     * Easy to learn and work with (in comparison to ``LaTeX``)
-
-.. TODO: Expand with examples
-
-#. RelaxNG or RelaxNG compact instead of the DTD schema
-
-    * Simpler and more powerful than the DTD
-    * Automated conversion to ``XSD`` with trang_
-    * RelaxNG compact looks very like the BNF
-    * `MEF RelaxNG Schema <https://github.com/rakhimov/scram/blob/master/share/open-psa/mef.rng>`_
-    * `MEF RelaxNG Compact Schema <https://github.com/rakhimov/scram/blob/master/share/open-psa/mef.rnc>`_
 
 #. Removal of the 'include' specification
 
@@ -391,24 +440,3 @@ Proposals to the MEF
    with ``e`` or ``E`` for the exponent.
 
 .. _trang: http://www.thaiopensource.com/relaxng/trang.html
-
-
-Specification for the Name format
-=================================
-
-- Case-sensitive or case-agnostic (simplifies code for l10n/i18n)
-- Insensitive to leading and trailing whitespace characters (trim)
-- Consistent with `XML NCName datatype`_
-
-    * The first character must be alphabetic.
-    * May contain alphanumeric characters and special characters like ``_``, ``-``.
-    * No whitespace or other special characters like ``:``, ``,``, ``/``, etc.
-
-- No double dashes ``--``
-- No trailing dash
-- No periods ``.``
-
-    * Reserved for the Reference format, i.e., ``fault_tree.component.event``
-
-.. _XML NCName datatype:
-    http://stackoverflow.com/questions/1631396/what-is-an-xsncname-type-and-when-should-it-be-used

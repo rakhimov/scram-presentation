@@ -28,6 +28,13 @@ pageTemplates:
         showHeader: true
         showFooter: true
 
+    titlePage:
+        frames: []
+            [3%, 3%, 94%, 60%]
+        showHeader: false
+        showFooter: false
+        alignment: TA_CENTER
+
 fontsAlias:
     titleFont:         IstokWeb-Bold
     headingFont:       IstokWeb-Regular
