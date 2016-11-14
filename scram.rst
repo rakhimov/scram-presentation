@@ -403,20 +403,47 @@ Specification for the Name format
 .. _XML NCName datatype:
     http://stackoverflow.com/questions/1631396/what-is-an-xsncname-type-and-when-should-it-be-used
 
+.. code-block:: xml
+
+  <define name="Identifier">
+    <data type="NCName">
+      <param name="pattern">[^\-.]+(-[^\-.]+)*</param>
+    </data>
+  </define>
+
 
 RelaxNG instead of the DTD schema
 =================================
 
+* DTD schema issue: Boolean operators vs Gate formulae (and, or, not)
 * Simpler and more powerful than the DTD
 * Automated conversion to ``XSD`` with trang_
-* RelaxNG compact looks very like the BNF
+* It's ready:
+  `MEF RelaxNG Schema <https://github.com/rakhimov/scram/blob/master/share/open-psa/mef.rng>`_,
+  `MEF RelaxNG Compact Schema <https://github.com/rakhimov/scram/blob/master/share/open-psa/mef.rnc>`_
 
 
-It's Ready!
------------
+*RelaxNG*
 
-* `MEF RelaxNG Schema <https://github.com/rakhimov/scram/blob/master/share/open-psa/mef.rng>`_
-* `MEF RelaxNG Compact Schema <https://github.com/rakhimov/scram/blob/master/share/open-psa/mef.rnc>`_
+.. code-block:: xml
+
+  <define name="gate-definition">
+    <element name="define-gate">
+      <ref name="name"/>
+      <optional> <ref name="role"/> </optional>
+      <optional> <ref name="label"/> </optional>
+      <optional> <ref name="attributes"/> </optional>
+      <ref name="formula"/>
+    </element>
+  </define>
+
+
+*RelaxNG Compact (looks like BNF)*
+
+.. code-block:: rnc
+
+  gate-definition =
+    element define-gate { name, role?, label?, attributes?, formula }
 
 
 Other Proposals
