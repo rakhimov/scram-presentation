@@ -4,8 +4,8 @@ embeddedFonts: []
 
 pageSetup:
     size: null
-    width: 297mm
-    height: 210mm
+    width: 10inch
+    height: 7.5inch
     margin-top: 0cm
     margin-bottom: 0cm
     margin-left: 0cm
@@ -24,7 +24,7 @@ pageTemplates:
 
     cutePage:
         frames: []
-            [3%, 3%, 94%, 90%]
+            [3%, 3%, 94%, 94%]
         showHeader: true
         showFooter: true
 
@@ -37,7 +37,7 @@ pageTemplates:
 
     endPage:
         frames: []
-            [13%, 3%, 70%, 60%]
+            [5%, 3%, 90%, 60%]
         showHeader: false
         showFooter: false
         alignment: TA_CENTER

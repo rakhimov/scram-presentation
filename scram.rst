@@ -31,6 +31,9 @@ History
 - 2300+ commits
 - 20+ releases
 
+.. image:: git-history.png
+    :scale: 250 %
+
 
 Development
 ===========
@@ -39,7 +42,7 @@ Development
 
 - C++14 (~10 KLOC / ~85%)
 
-    * Compilers: GCC 4.9, Clang 3.4, Intel 17.0
+    * Compilers: GCC 4.9, Clang 3.4, Intel 17.0.1
     * Dependencies: CMake, Boost, LibXML++, Qt 5, TCMalloc or JEMalloc
 
 - Python (~2 KLOC / ~15%)
@@ -192,10 +195,6 @@ CEA9601
 +----------------+--------+-----------+-----------+
 | Memory, MiB    | 215    | 310       | 1,350     |
 +----------------+--------+-----------+-----------+
-| Reporting, s   | < 0.05 | 2.6       | 17.5      |
-+----------------+--------+-----------+-----------+
-| XML size, MB   | 9.3    | 329       | 2,200     |
-+----------------+--------+-----------+-----------+
 
 .. class:: comment
 
@@ -213,16 +212,14 @@ OpenPSA MEF in SCRAM 0.11.4
     * Components
     * Basic events
     * House events (Boolean constant)
-    * Gates (nested formulae)
+    * Gates (nested formula)
 
 #. Model Data
 #. Common Cause Failure Groups (beta-factor, MGL, alpha-factor, phi-factor)
 #. Parameters
 #. Expressions
 
-    * Constant expressions
-    * System mission time
-    * Parameter
+    * Constant expressions, System mission time, Parameter
     * Random deviate (normal, log-normal, histogram, uniform, gamma, beta)
     * Built-in expressions (exponential with 2 or 4 parameters, Weibull)
 
@@ -254,6 +251,11 @@ Challenges
 XML report file size
 --------------------
 
+- ~50x compression with ``gzip``
+- Reading with SAX parsers
+- HDF5 or SQL database as an alternative
+- Some binary format based on ZBDD serialization (probably, the most space efficient)
+
 +-------------------------------------------------+
 | CEA9601 Report                                  |
 +================+========+===========+===========+
@@ -265,11 +267,6 @@ XML report file size
 +----------------+--------+-----------+-----------+
 | XML size, MB   | 9.3    | 329       | 2,200     |
 +----------------+--------+-----------+-----------+
-
-- ~50x compression with ``gzip``
-- Reading with SAX parsers
-- HDF5 or SQL database as an alternative
-- Some binary format based on ZBDD serialization (probably, the most space efficient)
 
 
 INHIBIT gate
@@ -314,6 +311,10 @@ UNDEVELOPED event
   </define-basic-event>
 
 
+.. raw:: pdf
+
+    PageBreak
+
 Report CCF events in products
 -----------------------------
 
@@ -331,6 +332,10 @@ Report CCF events in products
     </sum-of-products>
   </results>
 
+
+.. raw:: pdf
+
+    PageBreak
 
 Report importance factors
 -------------------------
@@ -462,10 +467,10 @@ Other Proposals
 
 #. Incorporation of dynamic fault trees (PAND, SEQ, FDEP, SPARE)
 
-#. The decimal separator for floating-point numbers is ``.`` (dot)
-   regardless of the locale.
-   The scientific notation for floating-point numbers is recognized
-   with ``e`` or ``E`` for the exponent.
+#. Specification for floating-point number format
+
+    * The decimal separator ``.`` (dot) regardless of the locale
+    * The scientific notation with ``e`` or ``E`` for the exponent
 
 .. _trang: http://www.thaiopensource.com/relaxng/trang.html
 
