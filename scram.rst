@@ -1,10 +1,10 @@
 .. header:: SCRAM -- Command-line Risk Analysis Multi-tool
 .. footer:: © 2016, Olzhas Rakhimov, CC BY-SA 4.0
-            ###Page###/###Total###
 
+
+##############################################
 SCRAM -- Command-line Risk Analysis Multi-tool
-http://scram-pra.org
-Olzhas Rakhimov
+##############################################
 
 SCRAM 0.11.4
 ============
@@ -18,6 +18,7 @@ SCRAM 0.11.4
 
 - `OIN <http://www.openinventionnetwork.com/>`_ licensee (a royalty-free-patent community)
 - Available for all major platforms (GNU/Linux, Mac, Windows)
+- Documentation website: http://scram-pra.org
 
 
 History
