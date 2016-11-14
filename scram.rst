@@ -2,9 +2,9 @@
 .. footer:: © 2016, Olzhas Rakhimov, CC BY-SA 4.0
 
 
-##############################################
-SCRAM -- Command-line Risk Analysis Multi-tool
-##############################################
+#####################################
+Command-line Risk Analysis Multi-tool
+#####################################
 
 SCRAM 0.11.4
 ============

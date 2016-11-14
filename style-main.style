@@ -18,9 +18,10 @@ pageSetup:
 pageTemplates:
     coverPage:
         frames: []
-            [3%, 3%, 94%, 70%]
+            [3%, 3%, 94%, 65%]
         showHeader: false
         showFooter: false
+        background: scram-background.pdf
 
     cutePage:
         frames: []
