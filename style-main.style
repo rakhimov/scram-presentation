@@ -42,4 +42,14 @@ fontsAlias:
 
 styles:
     normal:
-        fontSize: 14
+        fontSize: 16
+    header:
+        fontSize: 12
+    footer:
+        fontSize: 10
+    bullet-list:
+        spaceAfter: 6
+        spaceBefore: 0
+    item-list:
+        spaceAfter: 6
+        spaceBefore: 0
