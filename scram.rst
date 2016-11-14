@@ -38,7 +38,7 @@ Development
 - C++14 (~10 KLOC / ~85%)
 
     * Compilers: GCC 4.9, Clang 3.4, Intel 17.0
-    * Dependencies: CMake, Boost, libxml++, Qt 5, TCMalloc or JEMalloc
+    * Dependencies: CMake, Boost, LibXML++, Qt 5, TCMalloc or JEMalloc
 
 - Python (~2 KLOC / ~15%)
 
@@ -80,7 +80,7 @@ Quality Assurance
 C++
 ---
 
-#. Performance profiling with Gprof, Valgrind_, and ``perf``
+#. Performance profiling with ``Gprof``, Valgrind_, and ``perf``
 #. Code coverage check with Gcov_ and reporting with Coveralls_
 #. Memory management bugs and leaks with Valgrind_
 #. Static code analysis with Coverity_ and CppCheck_
@@ -284,6 +284,7 @@ Proposals to the MEF
 ====================
 
 .. TODO: Consider separate page/slide.
+
 #. Host the MEF standard on GitHub
 
     * The organization: https://github.com/open-psa/
@@ -303,6 +304,7 @@ Proposals to the MEF
     * Easy to learn and work with (in comparison to ``LaTeX``)
 
 .. TODO: Expand with examples
+
 #. RelaxNG or RelaxNG compact instead of the DTD schema
 
     * Simpler and more powerful than the DTD
