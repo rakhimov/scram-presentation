@@ -9,9 +9,10 @@ SCRAM -- Command-line Risk Analysis Multi-tool
 SCRAM 0.11.4
 ============
 
-- Free and open-source software (FOSS) project licensed under the GPLv3+
+- Free, *as in free speech*, and open-source software (FOSS) project
 
-    * FOSS dependencies
+    * GPLv3 license
+    * Only FOSS dependencies
     * Modern FOSS languages, libraries, and tools
     * Open standards (OpenPSA MEF, XML, RelaxNG, reST)
     * Modern software development best practices
@@ -415,7 +416,7 @@ Specification for the Name format
 RelaxNG instead of the DTD schema
 =================================
 
-* DTD schema issue: Boolean operators vs Gate formulae (and, or, not)
+* DTD schema issue: Boolean operators vs. Gate formulae (and, or, not)
 * Simpler and more powerful than the DTD
 * Automated conversion to ``XSD`` with trang_
 * It's ready:
@@ -467,3 +468,15 @@ Other Proposals
    with ``e`` or ``E`` for the exponent.
 
 .. _trang: http://www.thaiopensource.com/relaxng/trang.html
+
+.. raw:: pdf
+
+    PageBreak endPage
+
+.. class:: title
+
+"Nothing is worse than having an itch you can never scratch."
+
+.. class:: attribution
+
+-- Leon Kowalski, *Blade Runner*
