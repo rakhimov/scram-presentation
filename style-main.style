@@ -53,3 +53,5 @@ styles:
     item-list:
         spaceAfter: 6
         spaceBefore: 0
+    comment:
+        fontSize: 10

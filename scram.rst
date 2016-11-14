@@ -103,6 +103,9 @@ C++
 .. _cppdep: https://pypi.python.org/pypi/cppdep
 
 
+Quality Assurance (cont.)
+=========================
+
 Python
 ------
 
@@ -137,20 +140,29 @@ Documentation          Full                 Full
 Implemented Features in SCRAM 0.11.4
 ====================================
 
-- Static fault tree analysis (MOCUS/BDD/ZBDD)
-- Non-coherent analysis (Minimal Cut Sets / Prime Implicants)
-- Analysis with common-cause failure models
-- Probability calculations with importance analysis
-- Uncertainty analysis with Monte Carlo simulations
-- Fault tree generator
-- The shorthand format to the MEF converter
+#. Static fault tree analysis
+
+    * MOCUS
+    * BDD (default)
+    * ZBDD
+
+#. Non-coherent model analysis
+
+    * Minimal Cut Sets
+    * Prime Implicants
+
+#. Analysis with common-cause failure models
+#. Probability calculations with importance analysis
+#. Uncertainty analysis with Monte Carlo simulations
+#. Fault tree generator
+#. The shorthand format to the MEF converter
 
 
 Performance
 ===========
 
-- Prefer code quality, clarity, simplicity, elegance over performance
-- Trade memory for speed
+#. Prefer code quality, clarity, simplicity, elegance over performance
+#. Trade memory for speed
 
 Baobab 1
 --------
@@ -164,7 +176,6 @@ No cut-off, all 46,188 MCS.
 +--------------+--------+-------+-------+
 | Memory, MiB  | 23     | 25    | 23    |
 +--------------+--------+-------+-------+
-
 
 CEA9601
 -------
@@ -185,28 +196,28 @@ CEA9601
 | XML size, MB   | 9.3    | 329       | 2,200     |
 +----------------+--------+-----------+-----------+
 
-.. note:: The report XML size shrinks by 50x upon compression.
+.. class:: comment
 
-.. note:: System specs: Core i7-2820QM, Ubuntu 16.04 x64, GCC 5.4.1, Boost 1.58, TCMalloc 2.4
+*System specs: Core i7-2820QM, Ubuntu 16.04 x64, GCC 5.4.1, Boost 1.58, TCMalloc 2.4*
 
 
 OpenPSA MEF in SCRAM 0.11.4
 ===========================
 
-- Label
-- Attributes
-- Public and Private Roles
-- Fault Tree Layer
+#. Label
+#. Attributes
+#. Public and Private Roles
+#. Fault Tree Layer
 
     * Components
     * Basic events
     * House events (Boolean constant)
     * Gates (nested formulae)
 
-- Model Data
-- Common Cause Failure Groups (beta-factor, MGL, alpha-factor, phi-factor)
-- Parameters
-- Expressions
+#. Model Data
+#. Common Cause Failure Groups (beta-factor, MGL, alpha-factor, phi-factor)
+#. Parameters
+#. Expressions
 
     * Constant expressions
     * System mission time
@@ -233,18 +244,73 @@ Issues with the MEF
 Challenges
 ==========
 
-- Representation of INHIBIT, UNDEVELOPED, CONDITIONAL
+'atleast' gate
+--------------
 
-    * :literal:`<attributes> <attribute name="flavor" value="inhibit"/> </attributes>`
-    * :literal:`<attributes> <attribute name="flavor" value="undeveloped"/> </attributes>`
-    * :literal:`<attributes> <attribute name="flavor" value="conditional"/> </attributes>`
+#. Many names: Vote, Voting, Voting-OR, Combination, Combo, atleast, K/N, N-OR-MORE
+#. API (Atleast vs. AtLeast vs. atleast vs. at_least)
 
-- 'atleast' gate
+XML report file size
+--------------------
 
-    * Many names: Vote, Voting, Voting-OR, Combination, Combo, atleast, K/N, N-OR-MORE
-    * API (Atleast vs. AtLeast vs. atleast vs. at_least)
++-------------------------------------------------+
+| CEA9601 Report                                  |
++================+========+===========+===========+
+| Cut-off order  | 4      | 5         | 6         |
++----------------+--------+-----------+-----------+
+| MCS            | 54,436 | 1,615,876 | 9,323,572 |
++----------------+--------+-----------+-----------+
+| Reporting, s   | < 0.05 | 2.6       | 17.5      |
++----------------+--------+-----------+-----------+
+| XML size, MB   | 9.3    | 329       | 2,200     |
++----------------+--------+-----------+-----------+
 
-- XML report file size (50x compression)
+- ~50x compression with ``gzip``
+- Reading with SAX parsers
+- HDF5 or SQL database as an alternative
+- Some binary format based on ZBDD serialization (probably, the most space efficient)
+
+
+INHIBIT gate
+------------
+
+.. code-block:: xml
+
+  <define-gate name="Gate">
+    <attributes>
+      <attribute name="flavor" value="inhibit"/>
+    </attributes>
+    <and>
+      <event name="ConditionalEvent"/>
+      <!-- argument events ... -->
+    </and>
+  </define-gate>
+
+
+CONDITIONAL event
+-----------------
+
+.. code-block:: xml
+
+  <define-basic-event name="ConditionalEvent">
+    <attributes>
+      <attribute name="flavor" value="conditional"/>
+    </attributes>
+    <float value="0.4"/>
+  </define-basic-event>
+
+
+UNDEVELOPED event
+-----------------
+
+.. code-block:: xml
+
+  <define-basic-event name="Undeveloped">
+    <attributes>
+      <attribute name="flavor" value="undeveloped"/>
+    </attributes>
+    <float value="0.5"/>
+  </define-basic-event>
 
 
 Report CCF events in products
@@ -258,11 +324,9 @@ Report CCF events in products
         <ccf-event ccf-group="Pumps" order="1" group-size="2">
           <basic-event name="PumpTwo"/>
         </ccf-event>
-        <ccf-event ccf-group="Valves" order="1" group-size="2">
-          <basic-event name="ValveOne"/>
-        </ccf-event>
+        <!-- ... -->
       </product>
-      <!-- ... -->
+    <!-- ... -->
     </sum-of-products>
   </results>
 
