@@ -1,2 +1,45 @@
+embeddedFonts: []
+   [fonts/IstokWeb-Regular.ttf, fonts/IstokWeb-Bold.ttf, fonts/IstokWeb-Italic.ttf, fonts/IstokWeb-BoldItalic.ttf]
+   [fonts/Inconsolata.ttf, fonts/Inconsolata.ttf, fonts/Inconsolata.ttf, fonts/Inconsolata.ttf]
+
 pageSetup:
+    size: null
+    width: 297mm
+    height: 210mm
+    margin-top: 0cm
+    margin-bottom: 0cm
+    margin-left: 0cm
+    margin-right: 0cm
+    margin-gutter: 0cm
+    spacing-header: 2mm
+    spacing-footer: 2mm
     firstTemplate: coverPage
+
+pageTemplates:
+    coverPage:
+        frames: []
+            [3%, 3%, 94%, 70%]
+        showHeader: false
+        showFooter: false
+
+    cutePage:
+        frames: []
+            [3%, 3%, 94%, 90%]
+        showHeader: true
+        showFooter: true
+
+fontsAlias:
+    titleFont:         IstokWeb-Bold
+    headingFont:       IstokWeb-Regular
+    stdFont:           IstokWeb-Regular
+    stdBold:           IstokWeb-Bold
+    stdItalic:         IstokWeb-Italic
+    stdBoldItalic:     IstokWeb-BoldItalic
+    stdMono:           Inconsolata
+    stdMonoItalic:     Inconsolata
+    stdMonoBold:       Inconsolata
+    stdMonoBoldItalic: Inconsolata
+
+styles:
+    normal:
+        fontSize: 14
