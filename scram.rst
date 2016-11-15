@@ -31,7 +31,7 @@ History
 - 2300+ commits
 - 20+ releases
 
-.. image:: git-history.png
+.. image:: images/git-history.png
     :scale: 250 %
 
 

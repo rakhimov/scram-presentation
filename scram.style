@@ -21,7 +21,7 @@ pageTemplates:
             [3%, 3%, 94%, 65%]
         showHeader: false
         showFooter: false
-        background: scram-background.pdf
+        background: images/scram-background.pdf
 
     cutePage:
         frames: []
