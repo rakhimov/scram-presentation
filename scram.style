@@ -9,7 +9,7 @@ pageSetup:
     margin-top: 0cm
     margin-bottom: 0cm
     margin-left: 0cm
-    margin-right: 0cm
+    margin-right: 2mm
     margin-gutter: 0cm
     spacing-header: 2mm
     spacing-footer: 2mm
@@ -28,6 +28,7 @@ pageTemplates:
             [3%, 3%, 94%, 94%]
         showHeader: true
         showFooter: true
+        background: background.pdf
 
     titlePage:
         frames: []
@@ -62,6 +63,7 @@ styles:
         fontSize: 12
     footer:
         fontSize: 10
+        alignment: TA_RIGHT
     bullet-list:
         spaceAfter: 6
         spaceBefore: 0

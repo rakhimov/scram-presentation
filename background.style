@@ -1,0 +1,13 @@
+pageSetup:
+    firstTemplate: backgroundPage
+
+styles:
+    footer:
+        alignment: TA_CENTER
+
+pageTemplates:
+    backgroundPage:
+        frames: []
+            [3%, 3%, 94%, 94%]
+        showHeader: false
+        showFooter: true

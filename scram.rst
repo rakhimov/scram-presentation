@@ -1,5 +1,5 @@
 .. header:: SCRAM -- Command-line Risk Analysis Multi-tool
-.. footer:: © 2016, Olzhas Rakhimov, CC BY-SA 4.0
+.. footer:: ###Page### / ###Total###
 
 
 #####################################
@@ -198,7 +198,7 @@ CEA9601
 
 .. class:: comment
 
-*System specs: Core i7-2820QM, Ubuntu 16.04 x64, GCC 5.4.1, Boost 1.58, TCMalloc 2.4*
+*System specs: Core i7-2820QM, Ubuntu 16.04 x64, GCC 5.4.0, Boost 1.58, TCMalloc 2.4*
 
 
 OpenPSA MEF in SCRAM 0.11.4
@@ -268,6 +268,9 @@ XML report file size
 | XML size, MB   | 9.3    | 329       | 2,200     |
 +----------------+--------+-----------+-----------+
 
+.. raw:: pdf
+
+    PageBreak
 
 INHIBIT gate
 ------------
@@ -297,6 +300,10 @@ CONDITIONAL event
     <float value="0.4"/>
   </define-basic-event>
 
+
+.. raw:: pdf
+
+    PageBreak
 
 UNDEVELOPED event
 -----------------
