@@ -11,15 +11,17 @@ SCRAM 0.11.4
 
 - Free, *as in free speech*, and open-source software (FOSS) project
 
-    * GPLv3 license
+    * GPLv3+ license
     * Only FOSS dependencies
     * Modern FOSS languages, libraries, and tools
     * Open standards (OpenPSA MEF, XML, RelaxNG, reST)
     * Modern software development best practices
 
+- Debian Science package
 - `OIN <http://www.openinventionnetwork.com/>`_ licensee (a royalty-free-patent community)
 - Available for all major platforms (GNU/Linux, Mac, Windows)
 - Documentation website: http://scram-pra.org
+- Development on GitHub: https://github.com/rakhimov/scram/
 
 
 History
@@ -29,7 +31,8 @@ History
 - Became a personal pet project
 - Has been a playground to learn and practice software development
 - 2300+ commits
-- 20+ releases
+- 20 releases
+- ~7 years of effort (COCOMO model)
 
 .. image:: images/git-history.png
     :scale: 250 %
@@ -38,14 +41,12 @@ History
 Development
 ===========
 
-- Hosted on GitHub: https://github.com/rakhimov/scram/
-
-- C++14 (~10 KLOC / ~85%)
+- C++14 (~10 kSLOC / ~85%)
 
     * Compilers: GCC 4.9, Clang 3.4, Intel 17.0.1
     * Dependencies: CMake, Boost, LibXML++, Qt 5, TCMalloc or JEMalloc
 
-- Python (~2 KLOC / ~15%)
+- Python (~2 kSLOC / ~15%)
 
     * 2.7
     * 3.3+
@@ -53,10 +54,11 @@ Development
 - Documentation Driven Development
 
     * The documentation source text in reStructuredText_ format
-    * C++ documentation with Doxygen_
+    * C++ documentation with Doxygen_ (100% coverage)
+    * 34% comment/documentation lines (vs. 22% FOSS average)
 
-- Test Driven Development
-- Design by Contract
+- Test Driven Development (95% coverage)
+- Design by Contract (no exceptions in **analysis code**)
 - Policy-based design
 - Defensive programming
 - Analysis validation with XFTA
@@ -229,6 +231,7 @@ Issues with the MEF
 
 #. Minor errors in the MEF specification, the BNF or DTD schema
 #. The location of the Model Data
+#. Graphical representation for Cardinality, Imply, IFF gates
 #. The 'include' feature
 
     * Problems with automatic validation with the schema
