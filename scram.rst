@@ -14,7 +14,7 @@ SCRAM 0.11.4
     * GPLv3+ license
     * Only FOSS dependencies
     * Modern FOSS languages, libraries, and tools
-    * Open standards (OpenPSA MEF, XML, RelaxNG, reST)
+    * Open standards (Open-PSA MEF, XML, RelaxNG, reST)
     * Modern software development best practices
 
 - Debian Science package
@@ -32,10 +32,12 @@ History
 - Has been a playground to learn and practice software development
 - 2300+ commits
 - 20 releases
-- ~7 years of effort (COCOMO model)
+- 6+ years of effort (OpenHUB_ estimate with COCOMO model)
 
 .. image:: images/git-history.png
     :scale: 250 %
+
+.. _OpenHUB: https://www.openhub.net/p/scram
 
 
 Development
@@ -43,7 +45,7 @@ Development
 
 - C++14 (~10 kSLOC / ~85%)
 
-    * Compilers: GCC 4.9, Clang 3.4, Intel 17.0.1
+    * Compilers: GCC 4.9, Clang 3.4, Intel\ :sup:`®` 17.0.1
     * Dependencies: CMake, Boost, LibXML++, Qt 5, TCMalloc or JEMalloc
 
 - Python (~2 kSLOC / ~15%)
@@ -87,9 +89,10 @@ Quality Assurance
 C++
 ---
 
-#. Performance profiling with ``Gprof``, Valgrind_, and ``perf``
+#. Performance profiling with ``Gprof``, Valgrind_, ``perf``,
+   Intel\ :sup:`®` VTune and Advisor
 #. Code coverage check with Gcov_ and reporting with Coveralls_
-#. Memory management bugs and leaks with Valgrind_
+#. Memory management bug and leak detection with Valgrind_
 #. Static code analysis with Coverity_ and CppCheck_
 #. Cyclomatic complexity analysis with Lizard_
 #. Google style conformance check with Cpplint_
@@ -169,6 +172,7 @@ Performance
 
 #. Prefer code quality, clarity, simplicity, elegance over performance
 #. Trade memory for speed
+#. Avoid approximations if possible
 
 Baobab 1
 --------
@@ -203,18 +207,17 @@ CEA9601
 *System specs: Core i7-2820QM, Ubuntu 16.04 x64, GCC 5.4.0, Boost 1.58, TCMalloc 2.4*
 
 
-OpenPSA MEF in SCRAM 0.11.4
-===========================
+Open-PSA MEF in SCRAM 0.11.4
+============================
 
-#. Label
-#. Attributes
+#. Label and Attributes
 #. Public and Private Roles
 #. Fault Tree Layer
 
     * Components
     * Basic events
-    * House events (Boolean constant)
-    * Gates (nested formula)
+    * House events
+    * Gates (*nested formulae*)
 
 #. Model Data
 #. Common Cause Failure Groups (beta-factor, MGL, alpha-factor, phi-factor)
@@ -224,52 +227,27 @@ OpenPSA MEF in SCRAM 0.11.4
     * Constant expressions, System mission time, Parameter
     * Random deviate (normal, log-normal, histogram, uniform, gamma, beta)
     * Built-in expressions (exponential with 2 or 4 parameters, Weibull)
+    * Arithmetic expressions
 
 
-Issues with the MEF
-===================
+Challenges with MEF 2.0d
+========================
 
 #. Minor errors in the MEF specification, the BNF or DTD schema
 #. The location of the Model Data
-#. Graphical representation for Cardinality, Imply, IFF gates
-#. The 'include' feature
+#. Graphical representations for Cardinality, Imply, IFF gates
+#. Graphical representations for **nested formulae**
+#. The **include** feature
 
+    * XML snippet valid by itself or within the context?
     * Problems with automatic validation with the schema
-    * Semantics with public and private roles
+    * XInclude hack
+    * Multiple input file processing as an alternative
 
 #. Unspecified constraints on the name and reference formats
 
     * Problems with porting input files from one software to another
 
-
-Challenges
-==========
-
-'atleast' gate
---------------
-
-#. Many names: Vote, Voting, Voting-OR, Combination, Combo, atleast, K/N, N-OR-MORE
-#. API (Atleast vs. AtLeast vs. atleast vs. at_least)
-
-XML report file size
---------------------
-
-- ~50x compression with ``gzip``
-- Reading with SAX parsers
-- HDF5 or SQL database as an alternative
-- Some binary format based on ZBDD serialization (probably, the most space efficient)
-
-+-------------------------------------------------+
-| CEA9601 Report                                  |
-+================+========+===========+===========+
-| Cut-off order  | 4      | 5         | 6         |
-+----------------+--------+-----------+-----------+
-| MCS            | 54,436 | 1,615,876 | 9,323,572 |
-+----------------+--------+-----------+-----------+
-| Reporting, s   | < 0.05 | 2.6       | 17.5      |
-+----------------+--------+-----------+-----------+
-| XML size, MB   | 9.3    | 329       | 2,200     |
-+----------------+--------+-----------+-----------+
 
 .. raw:: pdf
 
@@ -321,6 +299,38 @@ UNDEVELOPED event
   </define-basic-event>
 
 
+Challenges (cont.)
+==================
+
+*atleast* gate
+---------------
+
+#. Many other names: Vote, Voting, Voting-OR, Combination, Combo, K/N, OR-MORE
+
+   - OR-LESS, *atmost*: @\ :sup:`<=`\ (k/n, [x\ :sub:`i`\ ]) = @\ :sup:`>=`\ (n-k/n, [x'\ :sub:`i`\ ])
+
+#. API: Atleast vs. AtLeast, atleast vs. at_least, ATLEAST vs. AT_LEAST
+
+XML MEF report file size
+------------------------
+
+- ~50x compression with ``gzip``
+- Reading with SAX parsers
+- HDF5 or SQL database as an alternative
+- Some binary format based on ZBDD serialization (probably, the most space efficient)
+
++-------------------------------------------------+
+| CEA9601 Report                                  |
++================+========+===========+===========+
+| Cut-off order  | 4      | 5         | 6         |
++----------------+--------+-----------+-----------+
+| MCS            | 54,436 | 1,615,876 | 9,323,572 |
++----------------+--------+-----------+-----------+
+| Reporting, s   | < 0.05 | 2.6       | 17.5      |
++----------------+--------+-----------+-----------+
+| XML size, MB   | 9.3    | 329       | 2,200     |
++----------------+--------+-----------+-----------+
+
 .. raw:: pdf
 
     PageBreak
@@ -367,20 +377,21 @@ Report importance factors
 
 .. class:: title
 
-Proposals to the OpenPSA MEF
+Proposals to the Open-PSA MEF
 
 .. raw:: pdf
 
     PageBreak cutePage
 
+
 Host the MEF standard on GitHub
 ===============================
 
-For the OpenPSA
----------------
+For the Open-PSA
+----------------
 
-#. The organization: https://github.com/open-psa/
-#. Easy collaboration
+#. |opsa| rganization: https://github.com/open-psa/
+#. Easy collaboration (more volunteers!)
 #. Issue tracking
 #. Free web-site hosting
 #. Many more free perks for the project
@@ -398,6 +409,7 @@ Extra
 
 #. Mailing lists for discussions (e.g., Google groups)
 
+.. |opsa| image:: images/opsa_white.png
 
 Specification for the Name format
 =================================
@@ -428,15 +440,22 @@ Specification for the Name format
   </define>
 
 
-RelaxNG instead of the DTD schema
-=================================
+RelaxNG Schema
+==============
 
-* DTD schema issue: Boolean operators vs. Gate formulae (and, or, not)
-* Simpler and more powerful than the DTD
+* Simpler than ``XSD``
 * Automated conversion to ``XSD`` with trang_
-* It's ready:
+* It's ready *for 2.0d*:
   `MEF RelaxNG Schema <https://github.com/rakhimov/scram/blob/master/share/open-psa/mef.rng>`_,
   `MEF RelaxNG Compact Schema <https://github.com/rakhimov/scram/blob/master/share/open-psa/mef.rnc>`_
+
+
+*RelaxNG Compact (looks like the BNF!)*
+
+.. code-block:: rnc
+
+  gate-definition =
+    element define-gate { name, role?, label?, attributes?, formula }
 
 
 *RelaxNG*
@@ -453,36 +472,81 @@ RelaxNG instead of the DTD schema
     </element>
   </define>
 
-
-*RelaxNG Compact (looks like BNF)*
-
-.. code-block:: rnc
-
-  gate-definition =
-    element define-gate { name, role?, label?, attributes?, formula }
-
-
-Other Proposals
-===============
-
-#. The MEF standard source text in reStructuredText_ format
-
-    * Automated conversion to ``html``, ``LaTeX``, ``pdf``, ...
-    * Easy to learn and work with (in comparison to ``LaTeX``)
-
-#. Removal of the 'include' specification
-
-    * XInclude
-    * Multiple input file processing as an alternative
-
-#. Incorporation of dynamic fault trees (PAND, SEQ, FDEP, SPARE)
-
-#. Specification for floating-point number format
-
-    * The decimal separator ``.`` (dot) regardless of the locale
-    * The scientific notation with ``e`` or ``E`` for the exponent
-
 .. _trang: http://www.thaiopensource.com/relaxng/trang.html
+
+
+.. raw:: pdf
+
+    PageBreak
+
+.. code-block:: rst
+
+    reStructuredText
+    ================
+
+    #. **Powerful** *markup* language
+        - documentation
+        - website
+        - publishing
+    #. Easier\ :sup:`super` than ``LaTeX``
+    #. Supports inline ``LaTeX``, ``html``, image, code ... with Sphinx_
+
+        .. math:: \frac{ \sum_{t=0}^{N}f(t,k) }{N}
+
+    #. Automated conversion to ``html``, ``LaTeX``, ``pdf``, ...
+    #. Automatic generation of the MEF documentation website
+
+    +--------------+--------+
+    | Table        | Head   |
+    +==============+========+
+    | Data         | entry  |
+    +--------------+--------+
+
+    .. _Sphinx: http://sphinx-doc.org/
+
+
+reStructuredText
+================
+
+#. **Powerful** *markup* language
+
+    - documentation
+    - website
+    - publishing
+
+#. Easier\ :sup:`super` than ``LaTeX``
+#. Supports inline ``LaTeX``, ``html``, image, code ... with Sphinx_
+
+    .. math::
+        \frac{ \sum_{t=0}^{N}f(t,k) }{N}
+
+#. Automated conversion to ``html``, ``LaTeX``, ``pdf``, ...
+#. Automatic generation of the MEF documentation website
+
++--------------+--------+
+| Table        | head   |
++==============+========+
+| Data         | entry  |
++--------------+--------+
+
+
+Oops!
+=====
+
+Floating point number format
+----------------------------
+
+XML Schema Part 2: Datatypes Second Edition, `Lexical representation (§3.2.3.1)`_
+    **decimal** has a lexical representation consisting of a finite-length sequence
+    of decimal digits (#x30-#x39) separated by a **period** as a decimal indicator.
+    An optional leading sign is allowed. If the sign is omitted, "+" is assumed.
+    Leading and trailing zeroes are optional. If the fractional part is zero,
+    the period and following zero(es) can be omitted.
+    For example: -1.23, 12678967.543233, +100000.00, 210.
+
+.. _`Lexical representation (§3.2.3.1)`:
+    https://www.w3.org/TR/xmlschema-2/#decimal-lexical-representation
+
 
 .. raw:: pdf
 
